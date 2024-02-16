@@ -8,5 +8,8 @@ conda activate eeg_env
 conda install -c anaconda jupyter
 
 # Install necessary libraries
-conda install -c conda-forge numpy scipy matplotlib pandas mne pyedflib lxml
+conda install -c conda-forge numpy scipy matplotlib pandas pyedflib lxml -y
+
+pip install mne
+
 
