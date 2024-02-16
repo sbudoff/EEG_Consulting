@@ -1,0 +1,12 @@
+# Create a new Conda environment named 'EEG'
+conda create -n EEG python=3.9
+
+# Activate the environment
+conda activate eeg_env
+
+# Install Jupyter Notebook
+conda install -c anaconda jupyter
+
+# Install necessary libraries
+conda install -c conda-forge numpy scipy matplotlib pandas mne pyedflib lxml
+

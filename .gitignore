@@ -47,3 +47,11 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# EEG Data
+*.rtf
+*.rml
+*.edf
+*.xml
+*.y7
+
