@@ -12,4 +12,6 @@ conda install -c conda-forge numpy scipy matplotlib pandas pyedflib lxml -y
 
 pip install mne
 
+pip install openai
+
 
