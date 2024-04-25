@@ -55,4 +55,6 @@ rsconnect/
 *.xml
 *.7z
 *.pkl
-
+*.txt
+*.zip
+*.RML
