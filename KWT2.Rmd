@@ -1,0 +1,124 @@
+---
+title: "KWT 2"
+output: html_document
+date: "2024-04-29"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(tidyverse)
+
+setwd('/Users/nickrogers/Desktop')
+
+EEG <- read.csv('All_EEG_Data_Long.csv')
+
+# rescale sleep onset time to be 
+
+
+# Filter dataset so that each band is its own dataset, then check within it
+
+# Filter dataset
+eeg_sigma <- EEG[EEG$Band == 'Sigma',]
+eeg_alpha <- EEG[EEG$Band == 'Alpha',]
+eeg_beta <- EEG[EEG$Band == 'Beta',]
+eeg_delta <- EEG[EEG$Band == 'Delta',]
+eeg_gamma <- EEG[EEG$Band == 'Gamma',]
+eeg_theta <- EEG[EEG$Band == 'Theta',]
+
+
+
+# Tests of EEG power
+
+# Alpha
+kruskal.test(EEGpower~Cannabis, data = eeg_alpha)
+pairwise.wilcox.test(eeg_alpha$EEGpower, eeg_alpha$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Beta
+kruskal.test(EEGpower~Cannabis, data = eeg_beta)
+pairwise.wilcox.test(eeg_beta$EEGpower, eeg_beta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Delta
+kruskal.test(EEGpower~Cannabis, data = eeg_delta)
+pairwise.wilcox.test(eeg_delta$EEGpower, eeg_delta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Gamma
+kruskal.test(EEGpower~Cannabis, data = eeg_gamma)
+pairwise.wilcox.test(eeg_gamma$EEGpower, eeg_gamma$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Sigma
+kruskal.test(EEGpower~Cannabis, data = eeg_sigma)
+pairwise.wilcox.test(eeg_sigma$EEGpower, eeg_sigma$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Theta
+kruskal.test(EEGpower~Cannabis, data = eeg_theta)
+pairwise.wilcox.test(eeg_theta$EEGpower, eeg_theta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+
+# Tests of sleep onset
+
+# Alpha
+kruskal.test(sleep_onset~Cannabis, data = eeg_alpha)
+pairwise.wilcox.test(eeg_alpha$sleep_onset, eeg_alpha$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Beta
+kruskal.test(sleep_onset~Cannabis, data = eeg_beta)
+pairwise.wilcox.test(eeg_beta$sleep_onset, eeg_beta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Delta
+kruskal.test(sleep_onset~Cannabis, data = eeg_delta)
+pairwise.wilcox.test(eeg_delta$sleep_onset, eeg_delta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Gamma
+kruskal.test(sleep_onset~Cannabis, data = eeg_gamma)
+pairwise.wilcox.test(eeg_gamma$sleep_onset, eeg_gamma$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Sigma
+kruskal.test(sleep_onset~Cannabis, data = eeg_sigma)
+pairwise.wilcox.test(eeg_sigma$sleep_onset, eeg_sigma$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# Theta
+kruskal.test(sleep_onset~Cannabis, data = eeg_theta)
+pairwise.wilcox.test(eeg_theta$sleep_onset, eeg_theta$Cannabis, p.adjust.method = 'bonferroni')
+
+
+# overall EEG data
+kruskal.test(sleep_onset~Cannabis, data = EEG)
+pairwise.wilcox.test(EEG$sleep_onset, EEG$Cannabis, p.adjust.method = 'bonferroni')
+
+kruskal.test(sleep_onset~Gender, data=EEG)
+kruskal.test(sleep_onset~interaction(Gender, Cannabis), data=EEG)
+
+
+# Wake events
+
+eeg_0 <- EEG[EEG$Hour == 0,]
+eeg_1 <- EEG[EEG$Hour == 1,]
+eeg_2 <- EEG[EEG$Hour == 2,]
+eeg_3 <- EEG[EEG$Hour == 3,]
+
+kruskal.test(WakeEvents~Cannabis, data = eeg_0)
+pairwise.wilcox.test(eeg_0$WakeEvents, eeg_0$Cannabis, p.adjust.method = 'bonferroni')
+
+kruskal.test(WakeEvents~Cannabis, data = eeg_1)
+pairwise.wilcox.test(eeg_1$WakeEvents, eeg_1$Cannabis, p.adjust.method = 'bonferroni')
+
+kruskal.test(WakeEvents~Cannabis, data = eeg_2)
+pairwise.wilcox.test(eeg_2$WakeEvents, eeg_2$Cannabis, p.adjust.method = 'bonferroni')
+
+kruskal.test(WakeEvents~Cannabis, data = eeg_3)
+pairwise.wilcox.test(eeg_3$WakeEvents, eeg_3$Cannabis, p.adjust.method = 'bonferroni')
+

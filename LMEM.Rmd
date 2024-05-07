@@ -1,0 +1,229 @@
+---
+title: "LMEM"
+output: html_document
+date: "2024-04-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(lme4)
+library(lmerTest)
+
+setwd('/Users/nickrogers/Desktop')
+
+EEG <- read.csv('All_EEG_Data_Long.csv')
+EEG['sleep_onset'] <- (1/6720) * EEG['sleep_onset']
+
+# First run: Alpha bands
+
+# Filter dataset
+eeg_alpha <- EEG[EEG$Band == 'Alpha',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_alpha)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_alpha)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_alpha)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_alpha)
+summary(fm4)
+
+# Second run: Beta bands
+
+# Filter dataset
+eeg_beta <- EEG[EEG$Band == 'Beta',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_beta)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_beta)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_beta)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_beta)
+summary(fm4)
+
+
+# Third run: Delta bands
+
+# Filter dataset
+eeg_delta <- EEG[EEG$Band == 'Delta',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_delta)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_delta)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_delta)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_delta)
+summary(fm4)
+
+
+
+# Fourth run: Gamma bands
+
+# Filter dataset
+eeg_gamma <- EEG[EEG$Band == 'Gamma',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_gamma)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_gamma)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_gamma)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_gamma)
+summary(fm4)
+
+
+# Fifth run: Sigma bands
+
+# Filter dataset
+eeg_sigma <- EEG[EEG$Band == 'Sigma',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_sigma)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_sigma)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_sigma)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_sigma)
+summary(fm4)
+
+
+# Sixth run: Sigma bands
+
+# Filter dataset
+eeg_theta <- EEG[EEG$Band == 'Theta',]
+
+# Models
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_theta)
+summary(fm1)
+
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour | ID), eeg_theta)
+summary(fm2)
+
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Cannabis | ID), eeg_theta)
+summary(fm3)
+
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (Hour:Cannabis | ID), eeg_theta)
+summary(fm4)
+
+
+
+# Significant ones?
+
+# Alpha: information processing
+fm1 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_alpha)
+summary(fm1)
+
+# cannabis:hour and the intercept are significant, others are not
+
+# Beta: maintenance of sensorimoror & cognitive state
+fm2 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_beta)
+summary(fm2)
+# cannabis:hour and the intercept are significant
+
+# Delta: deep sleep
+fm3 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_delta)
+summary(fm3)
+# Hour, cannabis:hour and the intercept are significant
+
+# Gamma: working memory & perception
+fm4 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_gamma)
+summary(fm4)
+# cannabis:hour and the intercept are significant
+
+# Sigma: sensory perception and long term memory
+fm5 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_sigma)
+summary(fm5)
+#Intercept, cannabis, and cannabis:hour are significant
+
+# Theta: learning and memory
+fm6 <- lmer(EEGpower ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_theta)
+summary(fm6)
+# Intercept, cannabis:hour, and hour are significant
+
+
+# Trying it with sleep onset times
+
+# Alpha: information processing
+fm1 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_alpha)
+summary(fm1)
+# cannabis:hour and the intercept are significant, others are not
+
+# Beta: maintenance of sensorimoror & cognitive state
+fm2 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_beta)
+summary(fm2)
+# cannabis:hour and the intercept are significant
+
+# Delta: deep sleep
+fm3 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_delta)
+summary(fm3)
+# Hour, cannabis:hour and the intercept are significant
+
+# Gamma: working memory & perception
+fm4 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_gamma)
+summary(fm4)
+# cannabis:hour and the intercept are significant
+
+# Sigma: sensory perception and long term memory
+fm5 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_sigma)
+summary(fm5)
+#Intercept, cannabis, and cannabis:hour are significant
+
+# Theta: learning and memory
+fm6 <- lmer(sleep_onset ~ Cannabis + (1 | ID), eeg_theta)
+summary(fm6)
+# Intercept, cannabis:hour, and hour are significant
+
+
+# doesn't run on full dataset
+fm7 <- lmer(sleep_onset ~ Cannabis + (1 | ID), EEG)
+
+
+# Wake events
+fm_wake <- lmer(WakeEvents ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), EEG)
+summary(fm_wake)
+
+# Sleep time per stage
+eeg_W <- EEG[EEG$Stage == 'W',]
+eeg_R <- EEG[EEG$Stage == 'R',]
+eeg_N1 <- EEG[EEG$Stage == 'N1',]
+eeg_N2 <- EEG[EEG$Stage == 'N2',]
+eeg_N3 <- EEG[EEG$Stage == 'N3',]
+
+fm_wt <- lmer(SleepTime ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_W)
+summary(fm_wt)
+
+fm_rt <- lmer(SleepTime ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_R)
+summary(fm_rt)
+
+fm_n1t <- lmer(SleepTime ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_N1)
+summary(fm_n1t)
+
+fm_n2t <- lmer(SleepTime ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_N2)
+summary(fm_n2t)
+
+fm_n3t <- lmer(SleepTime ~ Cannabis + Hour + Cannabis:Hour + (1 | ID), eeg_N3)
+summary(fm_n3t)
